@@ -22,3 +22,8 @@ allow hal_fingerprint_default qfp-daemon:binder { call transfer };
 
 # Ignore all logging requests
 dontaudit hal_fingerprint_default storage_file:dir search;
+dontaudit hal_fingerprint_default storage_file:lnk_file read;
+dontaudit hal_fingerprint_default fuse:dir search;
+dontaudit hal_fingerprint_default fuse:file getattr;
+dontaudit hal_fingerprint_default mnt_user_file:dir search;
+dontaudit hal_fingerprint_default mnt_user_file:lnk_file read;
