@@ -1,3 +1,15 @@
+get_prop(untrusted_app_25, qemu_hw_mainkeys_prop)
+get_prop(untrusted_app_25, camera_prop)
+
+# Allow untrusted app to search for sysfs_zram only on userdebug
+userdebug_or_eng(`
+r_dir_file(untrusted_app, sysfs_zram)
+')
+
 dontaudit untrusted_app_25 hal_memtrack_default:binder { call };
+dontaudit untrusted_app_25 hal_memtrack_hwservice:hwservice_manager find;
 dontaudit untrusted_app_25 proc:file { read open getattr };
 dontaudit untrusted_app_25 proc_stat:file { read open getattr };
+dontaudit untrusted_app_25 sysfs:file { read open getattr };
+dontaudit untrusted_app_25 proc_zoneinfo:file { read open getattr };
+dontaudit untrusted_app_25 serialno_prop:file { open getattr };
