@@ -1,15 +1,32 @@
 get_prop(untrusted_app_25, qemu_hw_mainkeys_prop)
 get_prop(untrusted_app_25, camera_prop)
 
+# allow apps to read battery status
+allow untrusted_app_25 sysfs_battery_supply:lnk_file r_file_perms;
+
+# allow apps to read charging status
+r_dir_file(untrusted_app_25, sysfs_usb_supply)
+allow untrusted_app_25 sysfs_usb_supply:lnk_file r_file_perms;
+
 # Allow untrusted app to search for sysfs_zram only on userdebug
 userdebug_or_eng(`
-r_dir_file(untrusted_app, sysfs_zram)
+r_dir_file(untrusted_app_25, sysfs_zram)
 ')
 
-dontaudit untrusted_app_25 hal_memtrack_default:binder { call };
+allow untrusted_app_25 proc_stat:file r_file_perms;
+allow untrusted_app_25 rootfs:dir { read open };
+allow untrusted_app_25 sysfs:dir { read open };
+allow untrusted_app_25 vold_exec:file read;
+
+dontaudit untrusted_app_25 anr_data_file:dir read;
+dontaudit untrusted_app_25 hal_memtrack_default:binder call;
 dontaudit untrusted_app_25 hal_memtrack_hwservice:hwservice_manager find;
+
 dontaudit untrusted_app_25 proc:file { read open getattr };
-dontaudit untrusted_app_25 proc_stat:file { read open getattr };
 dontaudit untrusted_app_25 sysfs:file { read open getattr };
+dontaudit untrusted_app_25 apk_data_file:file { setattr };
 dontaudit untrusted_app_25 proc_zoneinfo:file { read open getattr };
-dontaudit untrusted_app_25 serialno_prop:file { open getattr };
+dontaudit untrusted_app_25 serialno_prop:file { read open getattr };
+
+dontaudit untrusted_app_25 untrusted_app_25:tcp_socket ioctl;
+dontaudit untrusted_app_25 untrusted_app_25:udp_socket ioctl;
