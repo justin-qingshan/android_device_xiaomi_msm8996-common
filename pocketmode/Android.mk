@@ -8,6 +8,7 @@ LOCAL_SRC_FILES := $(call all-java-files-under, src)
 LOCAL_PACKAGE_NAME := XiaomiPocketMode
 LOCAL_CERTIFICATE := platform
 LOCAL_VENDOR_MODULE := true
+LOCAL_PRIVATE_PLATFORM_APIS := true
 
 LOCAL_STATIC_ANDROID_LIBRARIES := \
     android-support-v4 \

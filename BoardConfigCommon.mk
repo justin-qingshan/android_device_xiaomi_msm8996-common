@@ -29,7 +29,7 @@ TARGET_CPU_ABI2 :=
 TARGET_CPU_VARIANT := kryo
 
 TARGET_2ND_ARCH := arm
-TARGET_2ND_ARCH_VARIANT := armv7-a-neon
+TARGET_2ND_ARCH_VARIANT := armv8-a
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := kryo
@@ -57,7 +57,6 @@ TARGET_BOARD_PLATFORM_GPU := qcom-adreno530
 
 # Properties
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
-TARGET_VENDOR_PROP += $(VENDOR_PATH)/vendor.prop
 
 # ANT+
 BOARD_ANT_WIRELESS_DEVICE := "qualcomm-hidl"
@@ -182,6 +181,9 @@ TARGET_RELEASETOOLS_EXTENSIONS := $(VENDOR_PATH)
 
 # RIL
 TARGET_RIL_VARIANT := caf
+
+# Security patch level
+VENDOR_SECURITY_PATCH := 2018-06-01
 
 # SELinux
 include device/qcom/sepolicy/sepolicy.mk
