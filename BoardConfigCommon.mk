@@ -141,11 +141,7 @@ DEVICE_MANIFEST_FILE := $(VENDOR_PATH)/manifest.xml
 DEVICE_MATRIX_FILE := $(VENDOR_PATH)/compatibility_matrix.xml
 
 # Lineage Hardware
-BOARD_HARDWARE_CLASS += \
-    $(VENDOR_PATH)/lineagehw
-
-# NFC
-BOARD_NFC_HAL_SUFFIX := $(TARGET_BOARD_PLATFORM)
+JAVA_SOURCE_OVERLAYS := org.lineageos.hardware|$(VENDOR_PATH)/lineagehw|**/*.java
 
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864
@@ -161,7 +157,7 @@ TARGET_COPY_OUT_VENDOR := vendor
 TARGET_USES_MKE2FS := true
 
 # Power
-TARGET_HAS_NO_WIFI_STATS := true
+TARGET_HAS_NO_WLAN_STATS := true
 TARGET_TAP_TO_WAKE_NODE := "/proc/touchpanel/double_tap_enable"
 TARGET_USES_INTERACTION_BOOST := true
 
@@ -183,7 +179,7 @@ TARGET_RELEASETOOLS_EXTENSIONS := $(VENDOR_PATH)
 TARGET_RIL_VARIANT := caf
 
 # Security patch level
-VENDOR_SECURITY_PATCH := 2018-06-01
+VENDOR_SECURITY_PATCH := 2018-07-01
 
 # SELinux
 include device/qcom/sepolicy/sepolicy.mk
